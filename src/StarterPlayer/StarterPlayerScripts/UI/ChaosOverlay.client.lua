@@ -1,0 +1,1 @@
+local RS=game:GetService('ReplicatedStorage');local Net=require(RS.Net.Events);Net.Get('ChaosBroadcast').OnClientEvent:Connect(function(p)if typeof(p)=='table' and p.name then print('[UI] CHAOS:',p.name,'('..p.duration..'s)')end end)

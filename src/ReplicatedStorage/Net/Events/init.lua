@@ -1,9 +1,1 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Net = {}
-function Net.Get(name)
-    local f = ReplicatedStorage:FindFirstChild("NetEvents") or Instance.new("Folder"); f.Name="NetEvents"; f.Parent=ReplicatedStorage
-    local e = f:FindFirstChild(name)
-    if not e then e = Instance.new("RemoteEvent"); e.Name = name; e.Parent = f end
-    return e
-end
-return Net
+local RS=game:GetService('ReplicatedStorage');local N={};function N.Get(n)local f=RS:FindFirstChild('NetEvents')or Instance.new('Folder');f.Name='NetEvents';f.Parent=RS;local e=f:FindFirstChild(n);if not e then e=Instance.new('RemoteEvent');e.Name=n;e.Parent=f end;return e end;return N

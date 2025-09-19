@@ -1,0 +1,36 @@
+name: Mirror src/docs to public repo
+on:
+  push:
+    branches: [ main, dev ]
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: Build export (scripts + docs only)
+        run: |
+          mkdir -p export
+          rsync -a --prune-empty-dirs \
+            --include="*/" --include="*.lua" --include="*.md" --exclude="*" \
+            src/ export/src/
+          rsync -a --include="*/" --include="*.md" --exclude="*" docs/ export/docs/ || true
+          cp default.project.json export/ || true
+
+      - name: Push to public mirror
+        env:
+          GH_TOKEN: ${{ secrets.PUBLIC_PUSH_TOKEN }}
+        run: |
+          PUB=github.com/<YOUR-USER>/ErrorRoyal-public.git
+          cd export
+          git init
+          git config user.name "mirror-bot"
+          git config user.email "mirror@users.noreply.github.com"
+          git add .
+          git commit -m "mirror: ${GITHUB_SHA}"
+          git branch -M main
+          git remote add origin https://${GH_TOKEN}@${PUB}
+          git push -f origin main

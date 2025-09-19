@@ -1,0 +1,42 @@
+name: Generate Navigator (anti-broken-links)
+
+on:
+  push:
+    branches: [ main, dev, 'feature/**' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  nav:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Build NAVIGATOR.md
+        run: |
+          REPO="${{ github.repository }}"
+          SHA="${{ github.sha }}"
+          mkdir -p docs
+          {
+            echo "# Repo Navigator — Error Royal"
+            echo
+            echo "Commit: \`$SHA\`"
+            echo
+            echo "Below are **permalinks** (view + raw) for all Lua files under \`src/\`."
+            echo
+            echo "## Files"
+            echo
+            while IFS= read -r -d '' f; do
+              path="${f#./}"
+              view_url="https://github.com/$REPO/blob/$SHA/$path"
+              raw_url="https://raw.githubusercontent.com/$REPO/$SHA/$path"
+              echo "- \`$path\` — [view]($view_url) | [raw]($raw_url)"
+            done < <(find ./src -type f -name '*.lua' -print0 | sort -z)
+          } > docs/NAVIGATOR.md
+      - name: Commit NAVIGATOR.md
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "docs/NAVIGATOR.md"
+          message: "docs: update NAVIGATOR.md [skip ci]"

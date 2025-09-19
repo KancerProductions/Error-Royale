@@ -1,1 +1,0 @@
-print('[SeasonService] Ready (placeholder)')

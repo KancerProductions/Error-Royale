@@ -39,3 +39,48 @@ luac.out
 *.x86_64
 *.hex
 
+# --- Roblox / Studio artifacts ---
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+
+# Studio autosaves / logs
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# --- Rojo & tooling ---
+.rojo/
+rojo-plugin-data/
+
+# --- Lua / build output ---
+/build/
+/dist/
+/coverage/
+
+# --- Editors / IDEs ---
+.vscode/
+.idea/
+*.code-workspace
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+
+# --- Env / secrets ---
+.env
+.env.*
+*.key
+*.pem
+
+# --- Misc ---
+*.orig
+*.rej
+
+# We keep placeholder files (like KeepEmpty.txt) to preserve empty folders
+

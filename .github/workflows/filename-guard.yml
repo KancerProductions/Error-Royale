@@ -1,0 +1,21 @@
+name: Guard script filename casing
+
+on:
+  pull_request:
+  push:
+    branches: [ main, dev, 'feature/**' ]
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail on PascalCase suffixes (.Server.lua / .Client.lua)
+        run: |
+          BAD=$(git ls-files | grep -E '(\.Server\.lua|\.Client\.lua)$' || true)
+          if [ -n "$BAD" ]; then
+            echo "Found invalid filenames:"
+            echo "$BAD"
+            echo "::error::Use .server.lua or .client.lua suffixes for Rojo."
+            exit 1
+          fi

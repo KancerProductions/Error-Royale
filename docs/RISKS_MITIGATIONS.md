@@ -1,5 +1,5 @@
-# Risks & Mitigations (Live)
-- Telegraphs 3s prior
+# Risks & Mitigations
+- Telegraphs before events
 - Cap enemies; throttle spawns
-- Weekly new chaos event
-- Validate payloads; rate-limit remotes
+- Weekly chaos drops
+- Validate payloads / rate-limit remotes

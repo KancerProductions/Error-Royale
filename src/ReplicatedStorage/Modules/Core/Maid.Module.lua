@@ -1,5 +1,1 @@
-local Maid = {}; Maid.__index = Maid
-function Maid.new() return setmetatable({_tasks={}}, Maid) end
-function Maid:Give(t) table.insert(self._tasks,t); return t end
-function Maid:Cleanup() for i=#self._tasks,1,-1 do local t=self._tasks[i]; if typeof(t)=="RBXScriptConnection" then t:Disconnect() elseif typeof(t)=="function" then pcall(t) elseif t and t.Destroy then pcall(function() t:Destroy() end) end self._tasks[i]=nil end end
-return Maid
+local M={};M.__index=M;function M.new()return setmetatable({_t={}},M)end;function M:Give(t)table.insert(self._t,t)return t end;function M:Cleanup()for i=#self._t,1,-1 do local t=self._t[i];if typeof(t)=='RBXScriptConnection'then t:Disconnect()elseif typeof(t)=='function'then pcall(t)elseif t and t.Destroy then pcall(function()t:Destroy()end)end self._t[i]=nil end end;return M

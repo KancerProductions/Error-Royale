@@ -1,0 +1,1 @@
+local RS=game:GetService('ReplicatedStorage');local Net=require(RS.Net.Events);Net.Get('LeaderboardUpdate').OnClientEvent:Connect(function(payload)if typeof(payload)=='table' and typeof(payload.entries)=='table' then print('[LeaderboardUI] entries:',#payload.entries)end end)

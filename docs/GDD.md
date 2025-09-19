@@ -1,1 +1,1 @@
-# Error Royal — GDD (see full GDD file if provided)
+# Error Royal — GDD (imported separately if needed)

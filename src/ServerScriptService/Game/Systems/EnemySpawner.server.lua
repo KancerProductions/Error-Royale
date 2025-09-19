@@ -1,0 +1,1 @@
+local RS=game:GetService('ReplicatedStorage');local C=require(RS.Modules.Shared['Config.Module']);local wave=0;function _G.StartWave()wave+=1;local count=math.floor(C.WAVES.START_COUNT*(C.WAVES.GROWTH^(wave-1)));print('[Spawner] Wave',wave,'spawn',count)end

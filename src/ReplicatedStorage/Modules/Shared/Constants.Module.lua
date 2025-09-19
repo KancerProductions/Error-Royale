@@ -1,1 +1,1 @@
-local C = { Net = { Events = { ChaosBroadcast = 'ChaosBroadcast', LeaderboardUpdate = 'LeaderboardUpdate' } } } return C
+return { Net = { Events = { ChaosBroadcast='ChaosBroadcast', LeaderboardUpdate='LeaderboardUpdate' } } }

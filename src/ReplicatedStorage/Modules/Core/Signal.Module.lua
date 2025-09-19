@@ -1,5 +1,1 @@
-local Signal = {}; Signal.__index = Signal
-function Signal.new() return setmetatable({_binds={}}, Signal) end
-function Signal:Connect(fn) table.insert(self._binds, fn); return {Disconnect=function() for i,cb in ipairs(self._binds) do if cb==fn then table.remove(self._binds,i) break end end end} end
-function Signal:Fire(...) for _,cb in ipairs(self._binds) do task.spawn(cb, ...) end end
-return Signal
+local S={};S.__index=S;function S.new()return setmetatable({_b={}},S)end;function S:Connect(fn)table.insert(self._b,fn);return{Disconnect=function()for i,cb in ipairs(self._b)do if cb==fn then table.remove(self._b,i)break end end end}end;function S:Fire(...)for _,cb in ipairs(self._b)do task.spawn(cb,...)end end;return S

@@ -1,0 +1,5 @@
+- Chaos cadence correct
+- Telegraphs visible
+- Waves fair first 5m
+- Shop/UI open
+- Leaderboard updates

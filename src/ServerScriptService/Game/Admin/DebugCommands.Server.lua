@@ -1,1 +1,0 @@
-local ADMIN_IDS={3464615868}; game.Players.PlayerAdded:Connect(function(p) p.Chatted:Connect(function(msg) for _,id in ipairs(ADMIN_IDS) do if p.UserId==id and msg=='!chaos' then print('[Admin] Chaos tick requested') end end end) end)

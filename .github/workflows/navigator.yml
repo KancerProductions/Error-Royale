@@ -38,7 +38,17 @@ jobs:
             done < <(find ./src -type f -name '*.lua' -print0 | sort -z)
           } > docs/NAVIGATOR.md
 
-      - name: Create PR for NAVIGATOR.md
+      # If NOT on main, commit straight to the current branch (not protected)
+      - name: Auto-commit to current branch (non-main)
+        if: github.ref_name != 'main'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: update NAVIGATOR.md [skip ci]"
+          file_pattern: docs/NAVIGATOR.md
+
+      # If on main (protected), open a PR from a temp branch
+      - name: Create PR for NAVIGATOR.md (main only)
+        if: github.ref_name == 'main'
         uses: peter-evans/create-pull-request@v6
         with:
           commit-message: "docs: update NAVIGATOR.md [skip ci]"
@@ -47,5 +57,3 @@ jobs:
           branch: "ci/update-navigator"
           base: "main"
           delete-branch: true
-
-
